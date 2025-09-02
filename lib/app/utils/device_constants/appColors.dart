@@ -8,4 +8,5 @@ class AppColors {
   static const Color black = Colors.black;
   static Color grey = Colors.grey.shade300;
   static const Color yellowTextColor = Color(0xffFF961C);
+  static const Color splashBackgroundColor = Color(0xFF1E1E1E);
 }

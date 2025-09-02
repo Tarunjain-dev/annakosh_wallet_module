@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../data/firebase_services/firebase_auth_service.dart';
 import '../../get/controller/wallet_controller.dart';
 import '../../utils/device_constants/appColors.dart';
 import '../../utils/device_utils/scale_utility.dart';
@@ -17,8 +18,12 @@ class WalletFrontEnd extends StatelessWidget {
 
     var walletController = Get.find<WalletController>();
 
+    /// -- Firebase Auth Service Instance
+    final authService = FirebaseAuthServices();
+
     return Obx(
       (){
+        final user = walletController.userData.value!;
         return ClipRRect(
           borderRadius: BorderRadiusGeometry.circular(20),
           child: Container(
@@ -59,7 +64,7 @@ class WalletFrontEnd extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Expanded(child: SizedBox(width: scale.getScaledWidth(10),)),
-                            AutoSizeText("Tarun jain", style: TextStyle(fontSize: scale.getScaledFont(16), color: AppColors.white, fontWeight: FontWeight.bold),),
+                            AutoSizeText(user.userName, style: TextStyle(fontSize: scale.getScaledFont(16), color: AppColors.white, fontWeight: FontWeight.bold),),
                             SizedBox(width: scale.getScaledWidth(10),),
                             Image.asset("assets/image/wallet/card_network_logo.png", height: scale.getScaledHeight(18), width: scale.getScaledWidth(18), fit: BoxFit.contain,),
                             SizedBox(width: scale.getScaledWidth(20)),
@@ -76,7 +81,7 @@ class WalletFrontEnd extends StatelessWidget {
                         /// -- Annkosh Wallet Amount
                         Padding(
                           padding: scale.getPadding(left: 20),
-                          child: AutoSizeText(walletController.getCoins(), style: TextStyle(fontSize: scale.getScaledFont(24), color: AppColors.yellowTextColor, fontWeight: FontWeight.bold),),
+                          child: AutoSizeText(walletController.getCoins(coins: user.totalAnnakoshCoins.toDouble()), style: TextStyle(fontSize: scale.getScaledFont(24), color: AppColors.yellowTextColor, fontWeight: FontWeight.bold),),
                         ),
 
                         /// -- Divider Lines
@@ -92,7 +97,7 @@ class WalletFrontEnd extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Image.asset("assets/image/wallet/app_card_logo.png", height: scale.getScaledHeight(20), width: scale.getScaledWidth(28), fit: BoxFit.cover,),
-                              AutoSizeText("Annakosh Wallet", style: TextStyle(fontSize: scale.getScaledFont(14), color: AppColors.white, fontWeight: FontWeight.w800),),
+                              AutoSizeText("Tokrigo Wallet", style: TextStyle(fontSize: scale.getScaledFont(14), color: AppColors.white, fontWeight: FontWeight.w800),),
                             ],
                           ),
                         )
