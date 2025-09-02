@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "663471276668",
+    "project_id": "annakosh-referral-system",
+    "storage_bucket": "annakosh-referral-system.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:663471276668:android:8a34e51d05f527b6413ff9",
+        "android_client_info": {
+          "package_name": "com.example.wallet_module"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAr4Q7L5nQx56Wg6dyReJ3ug9y_7hKmmU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
