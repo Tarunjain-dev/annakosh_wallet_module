@@ -15,7 +15,7 @@ class SplashScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: AppColors.splashBackgroundColor,
-      body: Center(child: Text("Tokrigo Wallet Module", style: TextStyle(color: AppColors.white, fontSize: 22, fontWeight: FontWeight.bold))),
+      body: Center(child: Text("tokrigo_Wallet_Module".tr, style: TextStyle(color: AppColors.white, fontSize: 22, fontWeight: FontWeight.bold))),
     );
   }
 }

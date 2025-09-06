@@ -30,7 +30,7 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.splashBackgroundColor,
-      appBar: AppBar(title: Text("Login Screen", style: TextStyle(color: AppColors.white, fontWeight: FontWeight.bold),), backgroundColor: AppColors.primaryColor,),
+      appBar: AppBar(title: Text("login_screen".tr, style: TextStyle(color: AppColors.white, fontWeight: FontWeight.bold),), backgroundColor: AppColors.primaryColor,),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Form(
@@ -50,13 +50,13 @@ class LoginScreen extends StatelessWidget {
                 style: TextStyle(color: AppColors.grey),
                 validator: (value) {
                   if(value!.isEmpty){
-                    return "Enter Email";
+                    return "enter_email".tr;
                   }
                   return null;
                 },
                 onFieldSubmitted: (value) => FocusScope.of(context).requestFocus(passwordFocusNode),
                 decoration: InputDecoration(
-                  hintText: "Email",
+                  hintText: "email".tr,
                   hintStyle: TextStyle(color: AppColors.grey),
                   prefixIcon: Icon(Icons.email, color: AppColors.grey,),
                   border: OutlineInputBorder(
@@ -89,13 +89,13 @@ class LoginScreen extends StatelessWidget {
                 style: TextStyle(color: AppColors.grey),
                 validator: (value) {
                   if(value!.isEmpty){
-                    return "Enter Password";
+                    return "enter_password".tr;
                   }
                   return null;
                 },
                 onFieldSubmitted: (value) => FocusScope.of(context).unfocus(),
                 decoration: InputDecoration(
-                  hintText: "Password",
+                  hintText: "password".tr,
                   hintStyle: TextStyle(color: AppColors.grey),
                   prefixIcon: Icon(Icons.lock, color: Colors.grey,),
                   border: OutlineInputBorder(
@@ -133,7 +133,7 @@ class LoginScreen extends StatelessWidget {
                       ),
                       child: loginController.isLoading.value ?
                               CircularProgressIndicator(strokeWidth: 2, color: AppColors.white,) :
-                              Text("Login", style: TextStyle(color: AppColors.white, fontWeight: FontWeight.bold, fontSize: 18),),
+                              Text("login_button".tr, style: TextStyle(color: AppColors.white, fontWeight: FontWeight.bold, fontSize: 18),),
                     ),
                   ),
                 ),
@@ -142,13 +142,13 @@ class LoginScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Don't have an account?", style: TextStyle(color: AppColors.grey)),
+                  Text("dont_have_an_account?".tr, style: TextStyle(color: AppColors.grey)),
                   SizedBox(width: 8),
                   GestureDetector(
                       onTap: (){
                         Get.offNamed(AppRoutes.signupRoute);
                       },
-                      child: Text("Sign Up", style: TextStyle(color: Colors.blue),),
+                      child: Text("signup_button".tr, style: TextStyle(color: Colors.blue),),
                   ),
                 ],
               )

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:wallet_module/app/utils/device_constants/appStrings.dart';
+import '../../get/controller/language_Controller.dart';
 import '../../utils/device_constants/appColors.dart';
 import '../../utils/device_utils/scale_utility.dart';
 
@@ -12,11 +14,12 @@ class WalletBackend extends StatelessWidget {
     /// -- Initialize "ScalingUtility" class in EachScreen.
     final scale = ScalingUtility(context: context);
     scale.setCurrentDeviceSize();
+    final LanguageController langCtrl = Get.find();
 
     return ClipRRect(
       borderRadius: BorderRadiusGeometry.circular(20),
       child: Container(
-        height: scale.getScaledHeight(180),
+        height: scale.getScaledHeight(184),
         width: scale.getScaledWidth(360),
         decoration: BoxDecoration(
           color: AppColors.black,
@@ -37,7 +40,7 @@ class WalletBackend extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Text("Annakosh Wallet", style: TextStyle(fontSize: scale.getScaledFont(14), fontWeight: FontWeight.w800, color: AppColors.white),),
+                  Text("app_title".tr, style: TextStyle(fontSize: scale.getScaledFont(14), fontWeight: FontWeight.w800, color: AppColors.white),),
                   Image.asset("assets/image/wallet/app_card_logo.png", height: scale.getScaledHeight(20), width: scale.getScaledWidth(28), fit: BoxFit.cover,),
                 ],
               ),
@@ -59,7 +62,7 @@ class WalletBackend extends StatelessWidget {
                 children: [
                   Icon(Icons.info_outline_rounded, size: 20, color: Colors.grey.shade600,),
                   SizedBox(width: scale.getScaledWidth(8)),
-                  Text("About Annakosh Wallet.", style: TextStyle(fontWeight: FontWeight.bold, fontSize: scale.getScaledFont(14), color: Colors.grey.shade600),)
+                  Text("about_tokrigo_wallet".tr, style: TextStyle(fontWeight: FontWeight.bold, fontSize: scale.getScaledFont(14), color: Colors.grey.shade600),)
                 ],
               ),
             ),
@@ -69,7 +72,7 @@ class WalletBackend extends StatelessWidget {
               padding: scale.getPadding(right: 10, left: 10, bottom: 4),
               child: Container(
                 width: double.infinity,
-                height: scale.getScaledHeight(70),
+                height: scale.getScaledHeight(78),
                 decoration: BoxDecoration(
                   color: Colors.transparent,
                   border: Border.all(width: 1.5, color: Colors.grey.shade600),
@@ -77,7 +80,7 @@ class WalletBackend extends StatelessWidget {
                 ),
                 child: Padding(
                   padding: scale.getPadding(all: 4),
-                  child: Text(AppStrings.walletDescription, style: TextStyle(color: Colors.grey.shade600, fontWeight: FontWeight.normal, fontSize:  scale.getScaledFont(11)),),
+                  child: Text("tokrigo_wallet_description".tr, style: TextStyle(color: Colors.grey.shade600, fontWeight: FontWeight.normal, fontSize:  scale.getScaledFont(11)),),
                 ),
               ),
             ),

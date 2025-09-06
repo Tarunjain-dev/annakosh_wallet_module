@@ -56,7 +56,7 @@ class SignupScreen extends StatelessWidget {
       backgroundColor: AppColors.splashBackgroundColor,
       appBar: AppBar(
         title: Text(
-          "Signup Screen",
+          "signup_screen".tr,
           style: TextStyle(color: AppColors.white, fontWeight: FontWeight.bold),
         ),
         backgroundColor: AppColors.primaryColor,
@@ -80,13 +80,13 @@ class SignupScreen extends StatelessWidget {
                   style: TextStyle(color: AppColors.grey),
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
-                      return "Please enter user name";
+                      return "please_enter_user_name".tr;
                     }
                     return null;
                   },
                   onFieldSubmitted: (_) =>
                       FocusScope.of(context).requestFocus(emailFocusNode),
-                  decoration: _inputDecoration("User Name", Icons.person),
+                  decoration: _inputDecoration("user_name".tr, Icons.person),
                 ),
                 SizedBox(height: 10),
 
@@ -99,17 +99,17 @@ class SignupScreen extends StatelessWidget {
                   style: TextStyle(color: AppColors.grey),
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
-                      return "Please enter email";
+                      return "please_enter_email".tr;
                     }
                     if (!RegExp(r"^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$")
                         .hasMatch(value)) {
-                      return "Enter valid email";
+                      return "enter_valid_email".tr;
                     }
                     return null;
                   },
                   onFieldSubmitted: (_) =>
                       FocusScope.of(context).requestFocus(passwordFocusNode),
-                  decoration: _inputDecoration("Email", Icons.email),
+                  decoration: _inputDecoration("email".tr, Icons.email),
                 ),
                 SizedBox(height: 10),
 
@@ -122,13 +122,13 @@ class SignupScreen extends StatelessWidget {
                   style: TextStyle(color: AppColors.grey),
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
-                      return "Enter password";
+                      return "enter_password".tr;
                     }
                     return null;
                   },
                   onFieldSubmitted: (_) =>
                       FocusScope.of(context).requestFocus(confirmPasswordFocusNode),
-                  decoration: _inputDecoration("Password", Icons.lock),
+                  decoration: _inputDecoration("password".tr, Icons.lock),
                 ),
                 SizedBox(height: 10),
 
@@ -141,16 +141,16 @@ class SignupScreen extends StatelessWidget {
                   style: TextStyle(color: AppColors.grey),
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
-                      return "Confirm your password";
+                      return "confirm_your_password".tr;
                     }
                     if (value != passwordController.text.trim()) {
-                      return "Passwords do not match";
+                      return "passwords_do_not_match".tr;
                     }
                     return null;
                   },
                   onFieldSubmitted: (_) =>
                       FocusScope.of(context).requestFocus(referralCodeFocusNode),
-                  decoration: _inputDecoration("Confirm Password", Icons.lock),
+                  decoration: _inputDecoration("confirm_password".tr, Icons.lock),
                 ),
                 SizedBox(height: 10),
 
@@ -161,7 +161,7 @@ class SignupScreen extends StatelessWidget {
                   cursorColor: AppColors.primaryColor,
                   style: TextStyle(color: AppColors.grey),
                   decoration: _inputDecoration(
-                      "Referral Code (optional)", Icons.add_link_rounded),
+                      "referral_Code_optional".tr, Icons.add_link_rounded),
                 ),
 
                 SizedBox(height: 30),
@@ -178,7 +178,7 @@ class SignupScreen extends StatelessWidget {
                         ),
                         child: signupController.isLoading.value
                             ? CircularProgressIndicator(color: AppColors.white, strokeWidth: 2)
-                            : Text("Sign Up", style: TextStyle(color: AppColors.white, fontWeight: FontWeight.bold, fontSize: 18,),
+                            : Text("signup_button".tr, style: TextStyle(color: AppColors.white, fontWeight: FontWeight.bold, fontSize: 18,),
                         ),
                       ),
                     ),
@@ -189,12 +189,12 @@ class SignupScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Already have an account?",
+                    Text("already_have_an_account?".tr,
                         style: TextStyle(color: AppColors.grey)),
                     SizedBox(width: 8),
                     GestureDetector(
                       onTap: () => Get.offNamed('/login'),
-                      child: Text("Login",
+                      child: Text("login_button".tr,
                           style: TextStyle(color: Colors.blue)),
                     ),
                   ],

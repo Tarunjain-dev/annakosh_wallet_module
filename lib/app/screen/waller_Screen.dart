@@ -1,10 +1,12 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flip_card/flip_card.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wallet_module/app/screen/widgets/wallet_backend.dart';
 import 'package:wallet_module/app/screen/widgets/wallet_frontend.dart';
 import '../data/firebase_services/firebase_auth_service.dart';
+import '../get/controller/language_Controller.dart';
 import '../get/controller/wallet_controller.dart';
 import '../routes/appRoutes.dart';
 import '../utils/device_constants/appColors.dart';
@@ -21,12 +23,13 @@ class WallerScreen extends StatelessWidget {
 
     final authService = FirebaseAuthServices();
     var walletController = Get.find<WalletController>();
+    final LanguageController langCtrl = Get.find();
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.primaryColor,
         title: AutoSizeText(
-          "Tokrigo Wallet",
+          "app_title".tr,
           style: TextStyle(
             fontSize: scale.getScaledFont(18),
             color: AppColors.white,
@@ -34,6 +37,28 @@ class WallerScreen extends StatelessWidget {
           ),
         ),
         actions: [
+          /// -- Language Toggle Button
+          Obx(() {
+                  return CupertinoSegmentedControl<String>(
+              padding: const EdgeInsets.all(6),
+              groupValue: langCtrl.selectedLang.value,
+              borderColor: Colors.black,
+              selectedColor: AppColors.primaryColor,
+              children:  {
+                "en": Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  child: Text("EN", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800,),),
+                ),
+                "hi": Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  child: Text("हिं", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800,),),
+                ),
+              },
+              onValueChanged: (value) => langCtrl.changeLanguage(value),
+            );
+                },
+          ),
+
           /// -- My Referral Button
           Padding(
             padding: const EdgeInsets.only(right: 4, left: 4),
@@ -53,8 +78,7 @@ class WallerScreen extends StatelessWidget {
                         fontSize: 30,
                         fontWeight: FontWeight.bold,
                         color: Colors.black),
-                    middleText:
-                    "Share this referral code with friends and enjoy discounts on your next purchase!",
+                    middleText:"share_referral".tr,
                     middleTextStyle: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.normal,
@@ -67,8 +91,8 @@ class WallerScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      child: const Text(
-                        "OK",
+                      child: Text(
+                        "ok".tr,
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
@@ -105,6 +129,7 @@ class WallerScreen extends StatelessWidget {
           ),
         ],
       ),
+
       body: Obx(() {
         final user = walletController.userData.value;
 
@@ -124,7 +149,7 @@ class WallerScreen extends StatelessWidget {
               FlipCard(
                 fill: Fill.fillBack,
                 direction: FlipDirection.HORIZONTAL,
-                speed: 20000,
+                speed: 10000, // 20,000
                 side: CardSide.FRONT,
                 front: WalletFrontEnd(),
                 back: WalletBackend(),
@@ -154,6 +179,7 @@ class WallerScreen extends StatelessWidget {
                             Color(0xFFFF961C), // 100%
                           ],
                           stops: [0.00, 0.48, 0.58, 1.00],
+
                         ),
                       ),
                       child: Stack(
@@ -168,7 +194,7 @@ class WallerScreen extends StatelessWidget {
                                 Text(bonusPoints.toString(), style: TextStyle(fontWeight: FontWeight.bold, fontSize: scale.getScaledFont(20), color: AppColors.yellowTextColor),),
 
                                 /// -- Bonus points text
-                                Text("Bonus Points", style: TextStyle(fontWeight: FontWeight.bold, fontSize: scale.getScaledFont(12), color: Colors.white),),
+                                Text("bonus_points".tr, style: TextStyle(fontWeight: FontWeight.bold, fontSize: scale.getScaledFont(12), color: Colors.white),),
                               ],
                             ),
                           ),
@@ -237,10 +263,10 @@ class WallerScreen extends StatelessWidget {
                                 Text(directCount.toString(), style: TextStyle(fontWeight: FontWeight.bold, fontSize: scale.getScaledFont(20), color: Colors.red),),
 
                                 /// -- Direct Referral text
-                                Text("Direct Referrals", style: TextStyle(fontWeight: FontWeight.bold, fontSize: scale.getScaledFont(12), color: Colors.white),),
+                                Text("direct_referrals".tr, style: TextStyle(fontWeight: FontWeight.bold, fontSize: scale.getScaledFont(12), color: Colors.white),),
 
                                 /// -- Your network is growing!
-                                Text("Your network is growing!", style: TextStyle(fontWeight: FontWeight.bold, fontSize: scale.getScaledFont(9), color: Colors.white),),
+                                Text("network_growing".tr, style: TextStyle(fontWeight: FontWeight.bold, fontSize: scale.getScaledFont(9), color: Colors.white),),
 
                                 /// -- Circular circular avtar overlay layer
                                 SizedBox(height: scale.getScaledHeight(6)),
@@ -273,10 +299,11 @@ class WallerScreen extends StatelessWidget {
 
               /// -- CTA Buttons
               SizedBox(height: scale.getScaledHeight(20)),
-              const Padding(
+              Padding(
                 padding: EdgeInsets.symmetric(horizontal: 12),
                 child: Text(
-                  "Manage Bills, Expenses & Future with Tokrigo Wallet Systems.",
+                  // TODO: Start from here...
+                  "manage_bills".tr,
                   style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w600,
@@ -288,7 +315,7 @@ class WallerScreen extends StatelessWidget {
               /// -- Services List Horizontal
               SizedBox(height: scale.getScaledHeight(4),),
               SizedBox(
-                height: scale.getScaledHeight(80),
+                height: scale.getScaledHeight(95),
                 child: ListView.builder(
                   itemCount: 6,
                   scrollDirection: Axis.horizontal,
@@ -300,12 +327,24 @@ class WallerScreen extends StatelessWidget {
                 ),
               ),
 
+            // SizedBox(
+            //   height: scale.getScaledHeight(95),
+            //   child: Obx(() => ListView.builder(
+            //     itemCount: walletController.servicesNames.length,
+            //     scrollDirection: Axis.horizontal,
+            //     itemBuilder: (context, index) => buildComingSoonCard(
+            //       title: walletController.servicesNames[index],
+            //       asset: walletController.servicesImages[index],
+            //       bgColor: walletController.servicesColors[index],
+            //     ),
+            //   )),
+            // ),
+
               /// -- Direct Connection List Row Divider
-              SizedBox(height: scale.getScaledHeight(6)),
               Row(
-                children: const [
+                children: [
                   Expanded(child: Divider(indent: 4, endIndent: 4)),
-                  Text("Direct Connection List",
+                  Text("direct_connection_list".tr,
                       style:
                       TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                   Expanded(child: Divider(indent: 4, endIndent: 4)),
@@ -315,7 +354,7 @@ class WallerScreen extends StatelessWidget {
               /// -- Direct Connection List
               Obx(() {
                 if (walletController.directConnections.isEmpty) {
-                  return const Center(child: Text("No direct connections yet."));
+                  return Center(child: Text("no_direct_connections".tr));
                 }
                 return ListView.builder(
                   shrinkWrap: true, // Important for scroll inside SingleChildScrollView
@@ -354,7 +393,7 @@ class WallerScreen extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            height: 60,
+            height: 66,
             width: 100,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
@@ -364,10 +403,10 @@ class WallerScreen extends StatelessWidget {
           ),
           const SizedBox(height: 4),
           Text(
-            title,
+            title.tr,
             style: const TextStyle(
                 fontSize: 12,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w600,
                 color: Colors.black),
           ),
         ],

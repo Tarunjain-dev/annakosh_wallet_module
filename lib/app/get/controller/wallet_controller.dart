@@ -3,7 +3,8 @@ import "dart:ui";
 import "package:cloud_firestore/cloud_firestore.dart";
 import "package:firebase_auth/firebase_auth.dart";
 import "package:get/get.dart";
-import "package:money_formatter/money_formatter.dart";
+import "package:intl/intl.dart";
+
 
 import "../../data/models/user_model.dart";
 
@@ -18,13 +19,13 @@ class WalletController extends GetxController {
     "assets/image/comming_soon/giftcard.png",
   ];
 
-  List<String> servicesNames = [
-    "Property",
-    "Jobs",
-    "Electricity Repair",
-    "Shopping",
-    "Petrol & Diesel",
-    "E-Gift Cards",
+  List<String> get servicesNames =>  [
+    "property",
+    "jobs",
+    "electricity_repair",
+    "insurance",
+    "finance_services",
+    "legal_services",
   ];
 
   List<Color> servicesColors = [
@@ -48,40 +49,10 @@ class WalletController extends GetxController {
     return _formatIndianCurrency(coin);
   }
 
-  /// -- Rupee Formatter
-  MoneyFormatter rupeeFormatter(double amount) {
-    return MoneyFormatter(
-      amount: amount,
-      settings: MoneyFormatterSettings(
-        symbol: '₹',
-        thousandSeparator: ',',
-        decimalSeparator: '.',
-        fractionDigits: 2,
-        compactFormatType: CompactFormatType.short,
-      ),
-    );
-  }
-
-  /// -- Custom Indian Comma Placement
   String _formatIndianCurrency(double amount) {
-    String value = amount.toStringAsFixed(0);
-    String result = "";
-    int counter = 0;
-
-    for (int i = value.length - 1; i >= 0; i--) {
-      result = value[i] + result;
-      counter++;
-
-      if (i > 0) {
-        if (counter == 3) {
-          result = "," + result;
-        } else if (counter > 3 && (counter - 3) % 2 == 0) {
-          result = "," + result;
-        }
-      }
-    }
-
-    return "₹$result";
+    final currencyFormatter = NumberFormat.currency(locale: 'en_IN', symbol: '₹');
+    print("Formatted Currency: ${currencyFormatter.format(123456.78)}"); // ₹1,23,456.78
+    return currencyFormatter.format(amount).toString();
   }
 
   /// Realtime User Data Listener
